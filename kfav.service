@@ -1,0 +1,14 @@
+[Unit]
+Description=Karaoke Favorite
+After=network.target
+
+[Service]
+ExecStart=/bin/bash /home/pi/Projects/kfav/run.sh
+WorkingDirectory=/home/pi/Projects/kfav
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

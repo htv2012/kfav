@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/bulma.css" />
+    <title>Karaoke Favorites</title>
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Karaoke Favorites</h1>
+        <p class="subtitle">
+          My list of favorite songs
+        </p>
+      </div>
+    </section>
+
+    <!-- FORM -->
+    <section class="section">
+      <div class="container">
+        <form class="form" action="/" method="GET">
+
+          <div class="field">
+            <label for="title">Title</label>
+            <div class="control"><input type="text" name="title" /></div>
+          </div>
+
+          <div class="field">
+            <label for="author">Author</label>
+            <div class="control"><input type="text" name="author" /></div>
+          </div>
+
+          <div class="field">
+            <div class="control"><button class="button is-primary">Search</button></div>
+          </div>
+
+        </form>
+      </div> <!-- container -->
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <table class="table is-striped">
+          <thead>
+             <tr>
+                {% for cell in header %}
+                  <th>{{ cell }}</th>
+                {% endfor %}
+             </tr>
+          </thead>
+          <tbody>
+            {% for row in rows %}
+            <tr>
+                {% for key in header %}
+                  {% if key == "Title" %}
+                    <td><a target="_blank" href="https://www.youtube.com/results?search_query={{ row[key].replace("xyz", "").replace(" ", "+") }}+karaoke">{{ row[key] }}</a>
+                  {% elif key == "Author" %}
+                    <td><a href="/?author={{ row['searchableAuthor'] }}">{{ row[key] }}</a></td>
+                  {% else %}
+                    <td>{{ row[key] }}</td>
+                  {% endif %}
+                {% endfor %}
+            </tr></thead>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </body>
+</html>
